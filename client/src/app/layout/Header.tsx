@@ -1,5 +1,5 @@
 import { ShoppingCart } from "@mui/icons-material";
-import { AppBar, Badge, IconButton, List, ListItem, Switch, Toolbar, Typography } from "@mui/material";
+import { AppBar, Badge, Box, IconButton, List, ListItem, Switch, Toolbar, Typography } from "@mui/material";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
@@ -14,6 +14,9 @@ const rightLinks=[
     {title:'register',path:'/register'},
     
 ]
+
+const navStyles={color:'inherit',typography:'h6','&:hover':{color:'yellow'},textDecoration:'none'}
+
 // Define the type for the props
 type HeaderProps = {
     darkMode: boolean;
@@ -29,14 +32,19 @@ export default function Header({darkMode,setDarkmode}:HeaderProps){
 
     return(
         <AppBar position='static' sx={{mb:4}}> 
-            <Toolbar>
-                <Typography variant='h6' component={NavLink} to='/'
-                 sx={{color:'inherit',textDecoration:'none'}}
+            <Toolbar sx={{display:'flex', justifyContent:'space-between',alignItems:'center'}}>
+
+            <Box display='flex' alignItems='center'>
+            <Typography variant='h6' component={NavLink} to='/'
+                 sx={navStyles}
 
                 >
                     Restore
                 </Typography>
                 <Switch checked={darkMode} onChange={handleChange}/>
+            </Box>
+            
+          
                 <List sx={{display:'flex'}}>
                     {midLinks.map(({title,path})=>
                     (
@@ -44,19 +52,18 @@ export default function Header({darkMode,setDarkmode}:HeaderProps){
                         component={NavLink}
                         to={path}
                         key={path}
-                        sx={{color:'inherit',typography:'h6'}}
+                        sx={navStyles}
                         >
                          {title.toUpperCase()}   
                         </ListItem>
                     ))}
                 </List>
-
-                    <IconButton size='large' edge='start' color='inherit'  sx={{mr:2}}>
+                <Box display='flex' alignItems='center'>
+                <IconButton size='large' edge='start' color='inherit'  sx={{mr:2}}>
                         <Badge badgeContent='4' color="secondary">
                             <ShoppingCart/>
                         </Badge>
                     </IconButton>
-
                 <List sx={{display:'flex'}}>
                     {rightLinks.map(({title,path})=>
                     (
@@ -70,6 +77,9 @@ export default function Header({darkMode,setDarkmode}:HeaderProps){
                         </ListItem>
                     ))}
                 </List>
+                </Box>
+                   
+
             </Toolbar>
         </AppBar>
     )
