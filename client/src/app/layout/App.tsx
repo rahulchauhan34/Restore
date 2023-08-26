@@ -5,7 +5,8 @@ import { Container, Typography, createTheme } from '@mui/material';
 import Header from './Header';
 import { ThemeProvider } from '@emotion/react';
 import { Outlet } from 'react-router-dom';
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -24,6 +25,7 @@ const theme=createTheme({
 
   return (
     <ThemeProvider theme={theme} >
+      <ToastContainer position="bottom-right" hideProgressBar theme="colored"/>
       <Header darkMode={darkMode} setDarkmode={setDarkmode}/>
       <Container>
         <Outlet />
